@@ -1,8 +1,10 @@
-﻿using Home.Dto_s;
+﻿using FinalProject;
+using Home.Dto_s;
 using Home.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Home.Controllers
 {
@@ -17,7 +19,7 @@ namespace Home.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromForm] LoginDto dto)
+        public IActionResult Login([FromBody] LoginDto dto)
         {
             var token = _authServices.Login(dto);
             if (token == null)
@@ -27,49 +29,39 @@ namespace Home.Controllers
             return Ok(new { token });
         }
 
-        [HttpPost("Register")]
-        public IActionResult Register([FromBody] RegisterDto dto)
-        {
-            var success = _authServices.Register(dto);
-            if (!success)
-            {
-                return BadRequest("User already exists");
-            }
-            return Ok("User registered successfully");
-        }
+        //[HttpPost("Register")]
+        //public IActionResult Register([FromBody] RegisterDto dto)
+        //{
+        //    var success = _authServices.Register(dto);
+        //    if (!success)
+        //    {
+        //        return BadRequest("User already exists");
+        //    }
+        //    return Ok("User registered successfully");
+        //}
 
-        [HttpPost("Register_Patient")]
-        [AllowAnonymous]
-        public IActionResult RegisterPatient([FromBody] LoginDto dto)
-        {
-            var success = _authServices.RegisterPatient(dto.UserName, dto.Password);
-            if (!success)
-            {
-                return BadRequest("Patient already exists");
-            }
-            return Ok("Patient registered successfully");
-        }
-        [HttpPost("Register_Doctor")]
-        [AllowAnonymous]
-        public IActionResult RegisterDoctor([FromBody] LoginDto dto)
-        {
-            var success = _authServices.RegisterDoctor(dto.UserName, dto.Password);
-            if (!success)
-            {
-                return BadRequest("Doctor already exists");
-            }
-            return Ok("Doctor registered successfully");
-        }
-        [HttpPost("Register_Staff")]
-        [AllowAnonymous]
-        public IActionResult RegisterStaff([FromBody] LoginDto dto)
-        {
-            var success = _authServices.RegisterStaff(dto.UserName, dto.Password);
-            if (!success)
-            {
-                return BadRequest("Staff already exists");
-            }
-            return Ok("Staff registered successfully");
-        }
+        //[HttpPost("Register_Patient")]
+        //[AllowAnonymous]
+        //public IActionResult RegisterPatient([FromBody] LoginDto dto)
+        //{
+        //    var success = _authServices.RegisterPatient(dto.UserName, dto.Password);
+        //    if (!success)
+        //    {
+        //        return BadRequest("Patient already exists");
+        //    }
+        //    return Ok("Patient registered successfully");
+        //}
+        //[HttpPost("Register_Doctor")]
+        //[AllowAnonymous]
+        //public IActionResult RegisterDoctor([FromBody] LoginDto dto)
+        //{
+        //    var success = _authServices.RegisterDoctor(dto.UserName, dto.Password);
+        //    if (!success)
+        //    {
+        //        return BadRequest("Doctor already exists");
+        //    }
+        //    return Ok("Doctor registered successfully");
+        //}
+       
     }
 }

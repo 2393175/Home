@@ -16,9 +16,10 @@ namespace Home.Controllers
     {
         private readonly PatientRepository _patientRepository;
 
-        public PatientsController(AppDbContext context)
+        public PatientsController(PatientRepository appointmentRepository)
         {
-            _patientRepository = new PatientRepository(context);
+            _patientRepository = appointmentRepository;
+
         }
 
         [HttpGet("patients")]
@@ -42,8 +43,8 @@ namespace Home.Controllers
         }
 
         [HttpPost("patients")]
-        [Authorize(Roles = "Patient,Staff")]
-        [HttpPost]
+        //[Authorize(Roles = "Patient,Staff")]
+        
         public IActionResult AddPatient([FromBody] PatientDto patientDto)
         {
             if (patientDto == null)
@@ -52,7 +53,7 @@ namespace Home.Controllers
             }
 
             _patientRepository.AddPatient(patientDto);
-            return Ok("Patient added successfully.");
+            return Ok(new { message = "Patient added successfully" });
         }
         //public ActionResult AddPatient([FromBody] Patient patient)
         //{

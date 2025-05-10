@@ -20,7 +20,7 @@ namespace Home
                 options.AddPolicy("AllowAll",
                     policy =>
                     {
-                        policy.AllowAnyOrigin()
+                        policy.WithOrigins("*")
                                .AllowAnyMethod()
                                .AllowAnyHeader();
                     });
@@ -97,7 +97,9 @@ namespace Home
             builder.Services.AddScoped<SlotRepository>();
             builder.Services.AddScoped<AppointmentRepository>();
             builder.Services.AddScoped<StaffRepository>();
+            builder.Services.AddScoped<UserRepository>();
             builder.Services.AddScoped<DoctorRepository>();
+            builder.Services.AddScoped<PatientRepository>();
 
 
 

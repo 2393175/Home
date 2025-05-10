@@ -39,7 +39,7 @@ namespace Home.Controllers
         }
 
         [HttpPost("medical-histories")]
-        [Authorize(Roles = "Staff,Patient")]
+        //[Authorize(Roles = "Staff,Patient")]
         public ActionResult AddMedicalHistory([FromBody] MedicalHistory medicalHistory)
         {
             _medicalHistoryRepository.AddMedicalHistory(medicalHistory);

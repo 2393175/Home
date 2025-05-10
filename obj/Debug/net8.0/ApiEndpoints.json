@@ -163,6 +163,32 @@
   },
   {
     "ContainingType": "Home.Controllers.AppointmentController",
+    "Method": "GetPastAppointments",
+    "RelativePath": "api/Appointment/past/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[FinalProject.Appointment, FinalProject, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Home.Controllers.AppointmentController",
     "Method": "GetDoctorsBySpecializationAsync",
     "RelativePath": "api/Appointment/specialization/{specialization}",
     "HttpMethod": "GET",
@@ -224,78 +250,25 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Home.Controllers.AppointmentController",
+    "Method": "GetUpcomingAppointments",
+    "RelativePath": "api/Appointment/upcoming/{patientId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "patientId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Home.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/login",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "UserName",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "Password",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Home.Controllers.AuthController",
-    "Method": "Register",
-    "RelativePath": "api/Auth/Register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "Home.Dto_s.RegisterDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Home.Controllers.AuthController",
-    "Method": "RegisterDoctor",
-    "RelativePath": "api/Auth/Register_Doctor",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "Home.Dto_s.LoginDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Home.Controllers.AuthController",
-    "Method": "RegisterPatient",
-    "RelativePath": "api/Auth/Register_Patient",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "Home.Dto_s.LoginDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Home.Controllers.AuthController",
-    "Method": "RegisterStaff",
-    "RelativePath": "api/Auth/Register_Staff",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -575,22 +548,6 @@
   },
   {
     "ContainingType": "Home.Controllers.PatientsController",
-    "Method": "AddPatient",
-    "RelativePath": "api/Patients",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "patientDto",
-        "Type": "FinalProject.Dto.PatientDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Home.Controllers.PatientsController",
     "Method": "GetMedicalHistoryByPhoneNumber",
     "RelativePath": "api/Patients/medical-history/{phoneNumber}",
     "HttpMethod": "GET",
@@ -843,22 +800,6 @@
   },
   {
     "ContainingType": "Home.Controllers.StaffController",
-    "Method": "AddStaff",
-    "RelativePath": "api/Staff/add",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "staff",
-        "Type": "FinalProject.Staff",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Home.Controllers.StaffController",
     "Method": "GetAllStaff",
     "RelativePath": "api/Staff/all",
     "HttpMethod": "GET",
@@ -878,6 +819,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Home.Controllers.StaffController",
+    "Method": "RegisterStaff",
+    "RelativePath": "api/Staff/register-staff",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "staff",
+        "Type": "FinalProject.Staff",
         "IsRequired": true
       }
     ],

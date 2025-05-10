@@ -386,98 +386,71 @@
         }
       }
     },
-    "/api/Auth/login": {
-      "post": {
+    "/api/Appointment/past/{patientId}": {
+      "get": {
         "tags": [
-          "Auth"
+          "Appointment"
         ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "UserName": {
-                    "type": "string"
-                  },
-                  "Password": {
-                    "type": "string"
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
                   }
                 }
               },
-              "encoding": {
-                "UserName": {
-                  "style": "form"
-                },
-                "Password": {
-                  "style": "form"
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Appointment"
+                  }
                 }
               }
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
         }
       }
     },
-    "/api/Auth/Register": {
-      "post": {
+    "/api/Appointment/upcoming/{patientId}": {
+      "get": {
         "tags": [
-          "Auth"
+          "Appointment"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegisterDto"
-              }
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
             }
           }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Auth/Register_Patient": {
-      "post": {
-        "tags": [
-          "Auth"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "OK"
@@ -485,38 +458,7 @@
         }
       }
     },
-    "/api/Auth/Register_Doctor": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/Auth/Register_Staff": {
+    "/api/Auth/login": {
       "post": {
         "tags": [
           "Auth"
@@ -1169,37 +1111,6 @@
         }
       }
     },
-    "/api/Patients": {
-      "post": {
-        "tags": [
-          "Patients"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PatientDto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PatientDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/PatientDto"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/Patients/medical-history/{phoneNumber}": {
       "get": {
         "tags": [
@@ -1435,7 +1346,7 @@
         }
       }
     },
-    "/api/Staff/add": {
+    "/api/Staff/register-staff": {
       "post": {
         "tags": [
           "Staff"
@@ -1857,24 +1768,6 @@
           "patientDateOfBirth": {
             "type": "string",
             "format": "date-time",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "RegisterDto": {
-        "type": "object",
-        "properties": {
-          "userName": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "role": {
-            "type": "string",
             "nullable": true
           }
         },

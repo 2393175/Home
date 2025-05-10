@@ -231,10 +231,37 @@ namespace Home.Controllers
                 return StatusCode(500, new { error = $"Error cancelling appointment: {ex.Message}" });
             }
         }
+        [HttpGet("past/{patientId}")]
+        public ActionResult<List<Appointment>> GetPastAppointments(int patientId)
+        {
+            var appointments = _appointmentRepository.GetPastAppointmentsByPatientId(patientId);
 
+            if (appointments == null || appointments.Count == 0)
+            {
+                return NotFound(new { message = "No past appointments found for this patient." });
+            }
+
+            return Ok(appointments);
+        }
+        [HttpGet("upcoming/{patientId}")]
+        public IActionResult GetUpcomingAppointments(int patientId)
+        {
+            var appointments = _appointmentRepository.GetUpcomingAppointments(patientId);
+
+            if (appointments == null || appointments.Count == 0)
+            {
+                return NotFound("No upcoming appointments found.");
+            }
+
+            return Ok(appointments);
+        }
 
 
     }
+
+
+
 }
+
 
 

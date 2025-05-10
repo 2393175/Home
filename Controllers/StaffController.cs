@@ -18,18 +18,24 @@ namespace Home.Controllers
         }
 
         // Create - Add a new staff member
-        [HttpPost("add")]
-        [Authorize(Roles = "Staff,Admin")]
-        public IActionResult AddStaff([FromBody] Staff staff)
+        [HttpPost("register-staff")]
+        public IActionResult RegisterStaff([FromBody] Staff staff)
         {
             try
             {
+                if (staff == null || string.IsNullOrEmpty(staff.StaffEmail))
+                {
+                    return BadRequest("Invalid staff data.");
+                }
+
+                // Call repository method to add the staff
                 _staffRepository.AddStaff(staff);
-                return Ok(new { Message = "Staff added successfully.", Staff = staff });
+
+                return Ok(new { message = "Staff registered successfully!" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Error = ex.Message });
+                return StatusCode(500, $"Error registering staff: {ex.Message}");
             }
         }
 

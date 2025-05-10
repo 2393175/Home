@@ -1,5 +1,6 @@
 ﻿using FinalProject;
 using Home.Dto_s;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -35,54 +36,55 @@ namespace Home.Services
             return true;
         }
 
-        public bool RegisterPatient(string name, string password)
-        {
-            if (_context.Users.Any(u => u.UserName == name))
-            {
-                return false; // User already exists
-            }
-            var user = new User
-            {
-                UserName = name,
-                Password = password,
-                Role = "Patient"
-            };
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return true;
-        }
-        public bool RegisterDoctor(string name, string password)
-        {
-            if (_context.Users.Any(u => u.UserName == name))
-            {
-                return false; // User already exists
-            }
-            var user = new User
-            {
-                UserName = name,
-                Password = password,
-                Role = "Doctor"
-            };
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return true;
-        }
-        public bool RegisterStaff(string name, string password)
-        {
-            if (_context.Users.Any(u => u.UserName == name))
-            {
-                return false; // User already exists
-            }
-            var user = new User
-            {
-                UserName = name,
-                Password = password,
-                Role = "Staff"
-            };
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return true;
-        }
+        //public bool RegisterPatient(string name, string password)
+        //{
+        //    if (_context.Users.Any(u => u.UserName == name))
+        //    {
+        //        return false; // User already exists
+        //    }
+        //    var user = new User
+        //    {
+        //        UserName = name,
+        //        Password = password,
+        //        Role = "Patient"
+
+        //    };
+        //    _context.Users.Add(user);
+        //    _context.SaveChanges();
+        //    return true;
+        //}
+        //public bool RegisterDoctor(string name, string password)
+        //{
+        //    if (_context.Users.Any(u => u.UserName == name))
+        //    {
+        //        return false; // User already exists
+        //    }
+        //    var user = new User
+        //    {
+        //        UserName = name,
+        //        Password = password,
+        //        Role = "Doctor"
+        //    };
+        //    _context.Users.Add(user);
+        //    _context.SaveChanges();
+        //    return true;
+        //}
+        //public bool RegisterStaff(string name, string password)
+        //{
+        //    if (_context.Users.Any(u => u.UserName == name))
+        //    {
+        //        return false; // User already exists
+        //    }
+        //    var user = new User
+        //    {
+        //        UserName = name,
+        //        Password = password,
+        //        Role = "Staff"
+        //    };
+        //    _context.Users.Add(user);
+        //    _context.SaveChanges();
+        //    return true;
+        //}
 
         public string Login(LoginDto dto)
         {
@@ -101,7 +103,9 @@ namespace Home.Services
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                new Claim(ClaimTypes.Role, user.Role)
+                new Claim(ClaimTypes.Role, user.Role),
+                new Claim("RoleId", user.RoleId.ToString())
+
             };
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

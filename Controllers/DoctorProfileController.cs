@@ -11,11 +11,12 @@ namespace Home.Controllers
     public class DoctorController : ControllerBase
     {
         private readonly DoctorRepository _doctorRepository;
-
-        public DoctorController(AppDbContext context)
+        public DoctorController(DoctorRepository appointmentRepository)
         {
-            _doctorRepository = new DoctorRepository(context);
+            _doctorRepository = appointmentRepository;
+            
         }
+
 
         [HttpGet("doctors")]
         //[Authorize(Roles ="Staff,Patient")]
